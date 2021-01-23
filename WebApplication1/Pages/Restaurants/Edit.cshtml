@@ -1,0 +1,37 @@
+﻿@page "{restaurantId:int?}"
+@model OdeToFood.Pages.Restaurants.EditModel
+@{
+}
+
+<h2>Editing the model of @Model.Restaurant.Name</h2>
+
+<form method="post">
+    @*id,name,location,cuisine*@
+
+    <input type="hidden" asp-for="Restaurant.Id" />
+    <div class="form-group">
+        <label asp-for="Restaurant.Name"></label>
+        <input asp-for="Restaurant.Name" class="form-control" />
+        <span class="text-danger" asp-validation-for="Restaurant.Name"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Restaurant.Location"></label>
+        <input asp-for="Restaurant.Location" class="form-control" />
+        <span class="text-danger" asp-validation-for="Restaurant.Location"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Restaurant.Cuisine"></label>
+        @* Poti sa o populezi direct lista chemand aici Html property helper dar ese indicat sa o faci in cs *@
+        @*<select class="form-control" asp-for="Restaurant.Cuisine" asp-items="Html.GetEnumSelectList<OdeToFood.Core.CuisineType>()">*@
+        <select class="form-control" asp-for="Restaurant.Cuisine"
+                asp-items="@Model.Cuisines">
+        </select>
+    </div>
+
+
+    <button type="submit" class="btn btn-primary">
+        <i class="far fa-check-circle"></i> Submit
+    </button>
+    <a asp-page="./List" class="btn btn-secondary">Cancel</a>
+
+</form>

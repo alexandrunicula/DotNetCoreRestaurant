@@ -14,6 +14,8 @@ namespace OdeToFood.Pages.Restaurants
         private readonly IRestaurantData restaurantData;
 
         public Restaurant Restaurant { get; set; }
+        [TempData]
+        public string Message { get; set; }
 
         public DetailModel(IRestaurantData restaurantData)
         {
@@ -22,7 +24,7 @@ namespace OdeToFood.Pages.Restaurants
         public IActionResult OnGet(int restaurantId)
         {
 
-            Restaurant = restaurantData.GetRestaurantById(restaurantId);
+            Restaurant = restaurantData.GetByID(restaurantId);
 
             if (Restaurant == null)
             {
